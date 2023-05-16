@@ -1,10 +1,10 @@
 //
-//  Service.swift
+//  Constant.swift
 //  Podcast
 //
 //  Created by Baris on 16.05.2023.
 //
 
 import Foundation
-import Alamofire
 
+let BASE_URL = "https://itunes.apple.com/search"

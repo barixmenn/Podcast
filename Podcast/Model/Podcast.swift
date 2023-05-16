@@ -7,16 +7,14 @@
 
 import Foundation
 
-struct Search: Codable {
-    let resultCount : Int
-    let results : [Podcast]
+struct Search: Decodable {
+    let resultCount: Int
+    let results: [Podcast]
 }
-
-struct Podcast: Codable {
+struct Podcast: Decodable {
     var trackName: String?
     var artistName: String
     var trackCount: Int?
+    var artworkUrl600: String?
     var feedUrl: String?
-    var artworkUrl1600: String?
-    var feedUrl: String?
-}
+}	

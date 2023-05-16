@@ -69,8 +69,6 @@ extension SearchController {
 //MARK: - SearchDelegate
 extension SearchController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        AF.request("https://itunes.apple.com/search?term=jack+johnson").responseData { result in
-            print(String(data: result.data!, encoding: .utf8))
-        }
+        SearchService.fetchData(searchText: searchText)
     }
 }
