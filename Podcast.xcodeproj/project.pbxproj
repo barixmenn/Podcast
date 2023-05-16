@@ -20,6 +20,7 @@
 		604B76D82A14140800E141CD /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B76D72A14140800E141CD /* Podcast.swift */; };
 		604B76DB2A14152100E141CD /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B76DA2A14152100E141CD /* SearchService.swift */; };
 		604B76DE2A14157F00E141CD /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B76DD2A14157F00E141CD /* Constant.swift */; };
+		60AC75F52A141DA500F6C68D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AC75F42A141DA400F6C68D /* SearchViewModel.swift */; };
 		D11832254E952F4E80DB4D57 /* Pods_Podcast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33D0A823A6448E0D92A5651 /* Pods_Podcast.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		604B76D72A14140800E141CD /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		604B76DA2A14152100E141CD /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		604B76DD2A14157F00E141CD /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		60AC75F42A141DA400F6C68D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		ADCF7C7BF89FE68C2AF21887 /* Pods-Podcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Podcast.release.xcconfig"; path = "Target Support Files/Pods-Podcast/Pods-Podcast.release.xcconfig"; sourceTree = "<group>"; };
 		E33D0A823A6448E0D92A5651 /* Pods_Podcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Podcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -146,6 +148,7 @@
 		604B76CD2A13FA8B00E141CD /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				60AC75F32A141D9000F6C68D /* ViewModel */,
 				604B76D32A1404B300E141CD /* Cell */,
 				604B76CE2A13FA9600E141CD /* SearchController.swift */,
 			);
@@ -190,6 +193,14 @@
 				604B76DD2A14157F00E141CD /* Constant.swift */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		60AC75F32A141D9000F6C68D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				60AC75F42A141DA400F6C68D /* SearchViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		F28785CA8ED6B5DE96BFB9DF /* Frameworks */ = {
@@ -320,6 +331,7 @@
 				604B76B52A13F8EC00E141CD /* ViewController.swift in Sources */,
 				604B76B12A13F8EC00E141CD /* AppDelegate.swift in Sources */,
 				604B76D82A14140800E141CD /* Podcast.swift in Sources */,
+				60AC75F52A141DA500F6C68D /* SearchViewModel.swift in Sources */,
 				604B76D22A13FD2F00E141CD /* DownloadsController.swift in Sources */,
 				604B76DB2A14152100E141CD /* SearchService.swift in Sources */,
 				604B76DE2A14157F00E141CD /* Constant.swift in Sources */,

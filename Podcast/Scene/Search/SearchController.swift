@@ -66,7 +66,7 @@ extension SearchController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SearchCell
-        cell.dataResult = searchResult[indexPath.row]
+        cell.result = searchResult[indexPath.row]
         return cell
     }
 }

@@ -14,7 +14,6 @@ class SearchCell : UITableViewCell {
 //MARK: - UI Elements
     private let podcastImage: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .systemYellow
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +43,7 @@ class SearchCell : UITableViewCell {
     private var stackView = UIStackView()
     
 //MARK: - Properties
-    var dataResult : Podcast? {
+    var result   : Podcast? {
         didSet { configure() }
     }
     
@@ -92,11 +91,14 @@ extension SearchCell {
         ])
     }
     
-    private func configure() {
-        guard let result = self.dataResult else {return}
-        podcastName.text = dataResult?.trackName
-        podcastCount.text = "\(dataResult?.trackCount ?? 0)"
-        podcastArtist.text = dataResult?.artistName
-        podcastImage.kf.setImage(with: URL(string: (dataResult?.artworkUrl600)!)) 
-    }
+    private func configure(){
+           guard let result = self.result else { return }
+           let viewModel = SearchViewModel(podcast: result)
+           podcastName.text = viewModel.trackName
+           podcastCount.text = viewModel.trackCountString
+           podcastArtist.text = viewModel.artistName
+           podcastImage.kf.setImage(with: viewModel.photoImageUrl)
+       }
 }
+    
+    
