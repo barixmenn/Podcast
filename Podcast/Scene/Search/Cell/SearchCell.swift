@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class SearchCell : UITableViewCell {
     
@@ -41,6 +42,11 @@ class SearchCell : UITableViewCell {
     }()
     
     private var stackView = UIStackView()
+    
+//MARK: - Properties
+    var dataResult : Podcast? {
+        didSet { configure() }
+    }
     
 //MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -84,5 +90,13 @@ extension SearchCell {
             stackView.leadingAnchor.constraint(equalTo: podcastImage.trailingAnchor,constant: 10),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+    }
+    
+    private func configure() {
+        guard let result = self.dataResult else {return}
+        podcastName.text = dataResult?.trackName
+        podcastCount.text = "\(dataResult?.trackCount ?? 0)"
+        podcastArtist.text = dataResult?.artistName
+        podcastImage.kf.setImage(with: URL(string: (dataResult?.artworkUrl600)!)) 
     }
 }

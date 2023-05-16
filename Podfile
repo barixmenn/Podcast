@@ -7,5 +7,6 @@ target 'Podcast' do
 
   # Pods for Podcast
    pod 'Alamofire'
+   pod 'Kingfisher'
 
 end

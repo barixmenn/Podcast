@@ -10,7 +10,7 @@ import Alamofire
 
 
 final class SearchService {
-    static func fetchData(searchText: String) {
+    static func fetchData(searchText: String, completion:  @escaping([Podcast])-> Void) {
         let parameters = ["media": "podcast", "term": searchText]
         AF.request(BASE_URL, parameters: parameters).responseData { response in
             if let error = response.error {
@@ -21,6 +21,7 @@ final class SearchService {
             do{
                 let searchResult = try JSONDecoder().decode(Search.self, from: data)
                 print(searchResult.results)
+                completion(searchResult.results)
             } catch {
                 print(error.localizedDescription)
             }
