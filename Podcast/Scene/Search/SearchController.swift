@@ -8,7 +8,10 @@
 import Foundation
 import UIKit
 
-class SearchController: UIViewController {
+
+private let reuseIdentifier = "SearchCell"
+
+class SearchController: UITableViewController {
     //MARK: - UI Elements
     
     //MARK: - Properties
@@ -23,6 +26,7 @@ class SearchController: UIViewController {
     //MARK: - Functions
     private func setup() {
         style()
+        layout()
     }
     
     //MARK: - Actions
@@ -33,8 +37,37 @@ class SearchController: UIViewController {
 //MARK: - Helpers
 extension SearchController {
     private func style() {
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        self.title = "Search"
+        let searchContoller = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController = searchContoller
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        searchContoller.searchBar.delegate = self
+    }
+    
+    private func layout() {
         
     }
 
     
+}
+
+//MARK: - UITableViewDataSource
+extension SearchController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        cell.backgroundColor = .red
+        return cell
+    }
+}
+
+//MARK: - SearchDelegate
+extension SearchController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+    }
 }
