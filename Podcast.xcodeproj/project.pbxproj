@@ -17,6 +17,8 @@
 		604B76CF2A13FA9600E141CD /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B76CE2A13FA9600E141CD /* SearchController.swift */; };
 		604B76D22A13FD2F00E141CD /* DownloadsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B76D12A13FD2F00E141CD /* DownloadsController.swift */; };
 		604B76D52A1404BB00E141CD /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B76D42A1404BB00E141CD /* SearchCell.swift */; };
+		604B76D82A14140800E141CD /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B76D72A14140800E141CD /* Podcast.swift */; };
+		604B76DB2A14152100E141CD /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B76DA2A14152100E141CD /* Service.swift */; };
 		D11832254E952F4E80DB4D57 /* Pods_Podcast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33D0A823A6448E0D92A5651 /* Pods_Podcast.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		604B76CE2A13FA9600E141CD /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		604B76D12A13FD2F00E141CD /* DownloadsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsController.swift; sourceTree = "<group>"; };
 		604B76D42A1404BB00E141CD /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		604B76D72A14140800E141CD /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		604B76DA2A14152100E141CD /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		ADCF7C7BF89FE68C2AF21887 /* Pods-Podcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Podcast.release.xcconfig"; path = "Target Support Files/Pods-Podcast/Pods-Podcast.release.xcconfig"; sourceTree = "<group>"; };
 		E33D0A823A6448E0D92A5651 /* Pods_Podcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Podcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -80,6 +84,8 @@
 		604B76AF2A13F8EC00E141CD /* Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				604B76D92A14151B00E141CD /* Service */,
+				604B76D62A14140300E141CD /* Model */,
 				604B76C62A13F90700E141CD /* Screen */,
 				604B76C52A13F8FF00E141CD /* Scene */,
 				604B76C42A13F8F500E141CD /* App */,
@@ -157,6 +163,22 @@
 				604B76D42A1404BB00E141CD /* SearchCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		604B76D62A14140300E141CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				604B76D72A14140800E141CD /* Podcast.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		604B76D92A14151B00E141CD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				604B76DA2A14152100E141CD /* Service.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		F28785CA8ED6B5DE96BFB9DF /* Frameworks */ = {
@@ -286,7 +308,9 @@
 				604B76CF2A13FA9600E141CD /* SearchController.swift in Sources */,
 				604B76B52A13F8EC00E141CD /* ViewController.swift in Sources */,
 				604B76B12A13F8EC00E141CD /* AppDelegate.swift in Sources */,
+				604B76D82A14140800E141CD /* Podcast.swift in Sources */,
 				604B76D22A13FD2F00E141CD /* DownloadsController.swift in Sources */,
+				604B76DB2A14152100E141CD /* Service.swift in Sources */,
 				604B76C92A13FA2700E141CD /* MainTabController.swift in Sources */,
 				604B76B32A13F8EC00E141CD /* SceneDelegate.swift in Sources */,
 			);
