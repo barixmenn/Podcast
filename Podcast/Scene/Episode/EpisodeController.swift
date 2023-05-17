@@ -14,6 +14,10 @@ class EpisodeController: UITableViewController {
     
     //MARK: - Properties
     
+    private var episodeResult : [Episode] = [] {
+        didSet { self.tableView.reloadData() }
+    }
+    
     private var podcast: Podcast
     init(podcast: Podcast) {
         self.podcast = podcast
@@ -35,10 +39,22 @@ class EpisodeController: UITableViewController {
     private func setup() {
         style()
         layout()
+        fetchData()
     }
     
     //MARK: - Actions
     
+}
+
+//MARK: - Service
+extension EpisodeController {
+    fileprivate func fetchData() {
+        EpisodeService.fetchEpisodeData(urlString: self.podcast.feedUrl!) { result in
+            DispatchQueue.main.async {
+                self.episodeResult = result
+            }
+        }
+    }
 }
 
 
@@ -58,10 +74,18 @@ extension EpisodeController {
 //MARK: - UITableViewDataSoruce
 extension EpisodeController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return episodeResult.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! EpisodeCell
+        cell.episode = self.episodeResult[indexPath.row]
         return cell
+    }
+}
+//MARK: - UITableViewDelegate
+
+extension EpisodeController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
     }
 }
