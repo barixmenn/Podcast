@@ -14,6 +14,16 @@ class EpisodeController: UITableViewController {
     
     //MARK: - Properties
     
+    private var podcast: Podcast
+    init(podcast: Podcast) {
+        self.podcast = podcast
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +45,7 @@ class EpisodeController: UITableViewController {
 //MARK: - Helpers
 extension EpisodeController {
     private func style() {
+        self.navigationItem.title = podcast.trackName
         self.tableView.register(EpisodeCell.self, forCellReuseIdentifier: reuseIdentifier)
         
     }

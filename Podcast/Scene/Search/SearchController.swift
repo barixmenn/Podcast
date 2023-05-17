@@ -71,7 +71,8 @@ extension SearchController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = EpisodeController()
+        let selectedPodcast = self.searchResult[indexPath.row]
+        let controller = EpisodeController(podcast: selectedPodcast)
         navigationController?.pushViewController(controller, animated: true)
         
     }
