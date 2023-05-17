@@ -69,6 +69,12 @@ extension SearchController {
         cell.result = searchResult[indexPath.row]
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = EpisodeController()
+        navigationController?.pushViewController(controller, animated: true)
+        
+    }
 }
 
 //MARK: - SearchDelegate
