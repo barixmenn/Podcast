@@ -64,6 +64,7 @@ class PlayerController: UIViewController {
         button.setImage(UIImage(systemName: "goforward.30"), for: .normal)
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .center
+        button.addTarget(self, action: #selector(handleGoForWardButton), for: .touchUpInside)
         return button
     }()
     private lazy var goPlayButton: UIButton = {
@@ -81,12 +82,15 @@ class PlayerController: UIViewController {
         button.setImage(UIImage(systemName: "gobackward.15"), for: .normal)
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .center
+        button.addTarget(self, action: #selector(handleGoBackWardButton), for: .touchUpInside)
+
         return button
     }()
     private lazy var volumeSliderView: UISlider = {
         let slider = UISlider()
         slider.maximumValue = 100
         slider.minimumValue = 0
+        slider.addTarget(self, action: #selector(handleVolumeSliderView), for: .valueChanged)
         return slider
     }()
     private let plusImageView: UIImageView = {
@@ -137,6 +141,7 @@ class PlayerController: UIViewController {
         style()
         layout()
         startPodcast()
+        configure()
     }
     
     //MARK: - Function
@@ -145,6 +150,8 @@ class PlayerController: UIViewController {
         let playerItem = AVPlayerItem(url: url)
         player.replaceCurrentItem(with: playerItem)
         player.play()
+        self.goPlayButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        self.volumeSliderView.value = 40
         DispatchQueue.main.async {
             self.updateTimeLabel()
         }
@@ -156,10 +163,26 @@ class PlayerController: UIViewController {
             self.startLabel.text = time.formatString()
             let endTimeSecond = self.player.currentItem?.duration
             self.endLabel.text = endTimeSecond?.formatString()
-            
-
+            DispatchQueue.main.async {
+                self.updateSlider()
+            }
         }
     }
+    
+    private func updateSlider(){
+           let currentTimeSecond = CMTimeGetSeconds(player.currentTime())
+           let durationTime = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1))
+           let resultSecondTime = currentTimeSecond / durationTime
+           self.sliderView.value = Float(resultSecondTime)
+       }
+    
+    private func updateForward(value: Int64){
+           let exampleTime = CMTime(value: value, timescale: 1)
+           let seekTime = CMTimeAdd(player.currentTime(), exampleTime)
+           player.seek(to: seekTime)
+       }
+    
+  
     
 }
 
@@ -182,6 +205,19 @@ extension PlayerController {
     @objc func handleCloseButton (_ sender: UIButton) {
         self.dismiss(animated: true)
     }
+    
+    // For ward
+    @objc private func handleGoForWardButton(_ sender: UIButton){
+       updateForward(value: 30)
+    }
+    
+    @objc private func handleGoBackWardButton(_ sender: UIButton){
+       updateForward(value: -15)
+       }
+    
+    @objc private func handleVolumeSliderView(_ sender: UISlider){
+          player.volume = sender.value
+      }
 }
 
 //MARK: - Helpers
