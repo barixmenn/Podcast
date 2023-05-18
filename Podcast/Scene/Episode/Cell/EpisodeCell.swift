@@ -16,7 +16,7 @@ class EpisodeCell: UITableViewCell {
     private let episodeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 12
+            imageView.layer.cornerRadius = 12
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
