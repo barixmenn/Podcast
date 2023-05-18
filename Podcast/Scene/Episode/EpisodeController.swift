@@ -57,12 +57,21 @@ extension EpisodeController {
     }
 }
 
+//MARK: - Selector
+extension EpisodeController {
+    @objc func handleFavoriteButton(_ sender : UIBarButtonItem) {
+        
+    }
+}
+
 
 //MARK: - Helpers
 extension EpisodeController {
     private func style() {
         self.navigationItem.title = podcast.trackName
         self.tableView.register(EpisodeCell.self, forCellReuseIdentifier: reuseIdentifier)
+        let navigationButton = UIBarButtonItem(title: "Favorite", style: .done, target: self, action: #selector(handleFavoriteButton))
+        self.navigationItem.rightBarButtonItem = navigationButton
         
     }
     
