@@ -16,6 +16,7 @@ class PlayerController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "chevron.compact.down"), for: .normal)
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
         return button
     }()
     private let episodeImageView: UIImageView = {
@@ -42,7 +43,6 @@ class PlayerController: UIViewController {
         label.textAlignment = .right
         return label
     }()
-    private var timerStackView: UIStackView!
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "name"
@@ -57,29 +57,29 @@ class PlayerController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    private var playStackView: UIStackView!
     private lazy var goForWardButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .black
         button.setImage(UIImage(systemName: "goforward.30"), for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .center
         return button
     }()
     private lazy var goPlayButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .black
         button.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .center
+        button.addTarget(self, action: #selector(handleGoPlayButton), for: .touchUpInside)
         return button
     }()
     private lazy var goBackWardButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .black
         button.setImage(UIImage(systemName: "gobackward.15"), for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .center
         return button
     }()
     private lazy var volumeSliderView: UISlider = {
@@ -107,6 +107,10 @@ class PlayerController: UIViewController {
     
     private var mainStackView: UIStackView!
     private var volumeStackView: UIStackView!
+    private var playStackView: UIStackView!
+    private var timerStackView: UIStackView!
+
+
     
     
     //MARK: - Properties
@@ -131,12 +135,39 @@ class PlayerController: UIViewController {
     private func setup() {
         style()
         layout()
+        startPodcast()
     }
     
-    //MARK: - Actions
+    //MARK: - Function
+    private func startPodcast() {
+        guard let url = URL(string: episode.streamUrl) else {return}
+        let playerItem = AVPlayerItem(url: url)
+        player.replaceCurrentItem(with: playerItem)
+        player.play()
+    }
     
 }
 
+//MARK: - Selector
+extension PlayerController {
+    
+    // play
+    @objc func handleGoPlayButton(_ sender: UIButton) {
+        if player.timeControlStatus == .paused {
+            player.play()
+            self.goPlayButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            player.pause()
+            self.goPlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+
+        }
+    }
+    
+    // close
+    @objc func handleCloseButton (_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+}
 
 //MARK: - Helpers
 extension PlayerController {
