@@ -36,7 +36,7 @@ class FavoriteController: UICollectionViewController {
 //MARK: - Helpers
 extension FavoriteController {
     private func style() {
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
     private func layout() {
@@ -51,8 +51,7 @@ extension FavoriteController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        cell.backgroundColor = .blue
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FavoriteCell
         return cell
     }
 }

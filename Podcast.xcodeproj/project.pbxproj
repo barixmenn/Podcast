@@ -27,6 +27,7 @@
 		607F16092A16700000DA49A9 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607F16082A16700000DA49A9 /* PlayerController.swift */; };
 		607F160C2A167AF200DA49A9 /* Time+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607F160B2A167AF200DA49A9 /* Time+Extensions.swift */; };
 		60AC75F52A141DA500F6C68D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AC75F42A141DA400F6C68D /* SearchViewModel.swift */; };
+		60E1CE672A16D947009DDB98 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E1CE662A16D947009DDB98 /* FavoriteCell.swift */; };
 		D11832254E952F4E80DB4D57 /* Pods_Podcast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33D0A823A6448E0D92A5651 /* Pods_Podcast.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		607F16082A16700000DA49A9 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		607F160B2A167AF200DA49A9 /* Time+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Time+Extensions.swift"; sourceTree = "<group>"; };
 		60AC75F42A141DA400F6C68D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		60E1CE662A16D947009DDB98 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		ADCF7C7BF89FE68C2AF21887 /* Pods-Podcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Podcast.release.xcconfig"; path = "Target Support Files/Pods-Podcast/Pods-Podcast.release.xcconfig"; sourceTree = "<group>"; };
 		E33D0A823A6448E0D92A5651 /* Pods_Podcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Podcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -212,6 +214,7 @@
 		604B76CA2A13FA6D00E141CD /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				60E1CE652A16D941009DDB98 /* Cell */,
 				604B76CB2A13FA7600E141CD /* FavoriteController.swift */,
 			);
 			path = Favorite;
@@ -291,6 +294,14 @@
 				60AC75F42A141DA400F6C68D /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		60E1CE652A16D941009DDB98 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				60E1CE662A16D947009DDB98 /* FavoriteCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		F28785CA8ED6B5DE96BFB9DF /* Frameworks */ = {
@@ -430,6 +441,7 @@
 				604B76DE2A14157F00E141CD /* Constant.swift in Sources */,
 				603384DC2A15480700C6FB03 /* EpisodeController.swift in Sources */,
 				603384DF2A15499F00C6FB03 /* EpisodeCell.swift in Sources */,
+				60E1CE672A16D947009DDB98 /* FavoriteCell.swift in Sources */,
 				604B76C92A13FA2700E141CD /* MainTabController.swift in Sources */,
 				607F16092A16700000DA49A9 /* PlayerController.swift in Sources */,
 				604B76B32A13F8EC00E141CD /* SceneDelegate.swift in Sources */,
