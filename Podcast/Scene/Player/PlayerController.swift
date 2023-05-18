@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import Kingfisher
 
 class PlayerController: UIViewController {
     //MARK: - UI Elements
@@ -109,8 +110,8 @@ class PlayerController: UIViewController {
     private var volumeStackView: UIStackView!
     private var playStackView: UIStackView!
     private var timerStackView: UIStackView!
-
-
+    
+    
     
     
     //MARK: - Properties
@@ -144,6 +145,20 @@ class PlayerController: UIViewController {
         let playerItem = AVPlayerItem(url: url)
         player.replaceCurrentItem(with: playerItem)
         player.play()
+        DispatchQueue.main.async {
+            self.updateTimeLabel()
+        }
+    }
+    
+    private func updateTimeLabel() {
+        let interval = CMTimeMake(value: 1, timescale: 2)
+        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { time in
+            self.startLabel.text = time.formatString()
+            let endTimeSecond = self.player.currentItem?.duration
+            self.endLabel.text = endTimeSecond?.formatString()
+            
+
+        }
     }
     
 }
@@ -159,7 +174,7 @@ extension PlayerController {
         } else {
             player.pause()
             self.goPlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-
+            
         }
     }
     
@@ -205,5 +220,11 @@ extension PlayerController {
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             mainStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32)
         ])
+    }
+    
+    private func configure() {
+        self.episodeImageView.kf.setImage(with: URL(string: episode.imageUrl))
+        self.nameLabel.text = episode.title
+        self.userLabel.text = episode.author
     }
 }
