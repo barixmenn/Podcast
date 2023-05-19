@@ -83,7 +83,7 @@ class PlayerController: UIViewController {
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .center
         button.addTarget(self, action: #selector(handleGoBackWardButton), for: .touchUpInside)
-
+        
         return button
     }()
     private lazy var volumeSliderView: UISlider = {
@@ -145,16 +145,24 @@ class PlayerController: UIViewController {
     }
     
     //MARK: - Function
-    private func startPodcast() {
-        guard let url = URL(string: episode.streamUrl) else {return}
+    private func playPlayer(url: URL){
         let playerItem = AVPlayerItem(url: url)
         player.replaceCurrentItem(with: playerItem)
         player.play()
         self.goPlayButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         self.volumeSliderView.value = 40
-        DispatchQueue.main.async {
-            self.updateTimeLabel()
+        updateTimeLabel()
+    }
+    
+    private func startPodcast() {
+        if episode.fileUrl != nil{
+            guard let url = URL(string: episode.fileUrl ?? "") else { return }
+            guard var fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+            playPlayer(url: fileUrl)
+            return
         }
+        guard let url = URL(string: episode.streamUrl) else { return }
+        playPlayer(url: url)
     }
     
     private func updateTimeLabel() {
@@ -170,19 +178,19 @@ class PlayerController: UIViewController {
     }
     
     private func updateSlider(){
-           let currentTimeSecond = CMTimeGetSeconds(player.currentTime())
-           let durationTime = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1))
-           let resultSecondTime = currentTimeSecond / durationTime
-           self.sliderView.value = Float(resultSecondTime)
-       }
+        let currentTimeSecond = CMTimeGetSeconds(player.currentTime())
+        let durationTime = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1))
+        let resultSecondTime = currentTimeSecond / durationTime
+        self.sliderView.value = Float(resultSecondTime)
+    }
     
     private func updateForward(value: Int64){
-           let exampleTime = CMTime(value: value, timescale: 1)
-           let seekTime = CMTimeAdd(player.currentTime(), exampleTime)
-           player.seek(to: seekTime)
-       }
+        let exampleTime = CMTime(value: value, timescale: 1)
+        let seekTime = CMTimeAdd(player.currentTime(), exampleTime)
+        player.seek(to: seekTime)
+    }
     
-  
+    
     
 }
 
@@ -208,16 +216,16 @@ extension PlayerController {
     
     // For ward
     @objc private func handleGoForWardButton(_ sender: UIButton){
-       updateForward(value: 30)
+        updateForward(value: 30)
     }
     
     @objc private func handleGoBackWardButton(_ sender: UIButton){
-       updateForward(value: -15)
-       }
+        updateForward(value: -15)
+    }
     
     @objc private func handleVolumeSliderView(_ sender: UISlider){
-          player.volume = sender.value
-      }
+        player.volume = sender.value
+    }
 }
 
 //MARK: - Helpers

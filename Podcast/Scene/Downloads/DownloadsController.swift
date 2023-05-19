@@ -64,4 +64,9 @@ extension DownloadsController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = PlayerController(episode: self.episodeResult[indexPath.row])
+        self.present(controller, animated: true)
+    }
 }
