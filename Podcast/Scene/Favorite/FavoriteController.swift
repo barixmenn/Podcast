@@ -76,6 +76,13 @@ extension FavoriteController {
         cell.podcastCoreData = self.resultCoreDataItems[indexPath.row]
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let podcastCoreData = self.resultCoreDataItems[indexPath.row]
+        let podcast = Podcast(trackName: podcastCoreData.trackName, artistName: podcastCoreData.artistName!, artworkUrl600: podcastCoreData.artworkUrl600, feedUrl: podcastCoreData.feedUrl)
+        let controller = EpisodeController(podcast: podcast)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 //MARK: -UICollectionFlowLayout
