@@ -87,6 +87,9 @@ class EpisodeController: UITableViewController {
         model.trackName = self.podcast.trackName
         appDelegate.saveContext()
         isFavorite = true
+        let window = UIApplication.shared.connectedScenes.first as! UIWindowScene
+        let mainTabController = window.keyWindow?.rootViewController as! MainTabController
+        mainTabController.viewControllers?[0].tabBarItem.badgeValue = "New"
     }
     
     //MARK: - Function

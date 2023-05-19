@@ -30,6 +30,13 @@ class FavoriteController: UICollectionViewController {
         layout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let window = UIApplication.shared.connectedScenes.first as! UIWindowScene
+        let mainTabController = window.keyWindow?.rootViewController as! MainTabController
+        mainTabController.viewControllers?[0].tabBarItem.badgeValue = nil
+    }
+    
     //MARK: - Actions
     
 }
