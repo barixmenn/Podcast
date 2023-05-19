@@ -5,6 +5,8 @@
 + Programmatically ✅
 + Kingfisher ✅
 + Alafomire ✅
++ CoreData ✅
++ UserDefaults ✅
 
 
       
