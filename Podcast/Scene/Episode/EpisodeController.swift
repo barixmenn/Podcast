@@ -9,12 +9,10 @@ import Foundation
 import UIKit
 
 private let reuseIdentifier = "EpisodeCell"
-private let appDelegate = UIApplication.shared.delegate as! AppDelegate
 class EpisodeController: UITableViewController {
     //MARK: - UI Elements
     
     //MARK: - Properties
-    private let context = appDelegate.persistentContainer.viewContext
     
     private var episodeResult : [Episode] = [] {
         didSet { self.tableView.reloadData() }
@@ -27,16 +25,16 @@ class EpisodeController: UITableViewController {
     }
     
     private var resultCoreDataItems: [PodcastCoreData] = []{
-           didSet{
-               let isValue = resultCoreDataItems.contains(where: {$0.feedUrl == self.podcast.feedUrl})
-               if isValue{
-                   isFavorite = true
-               }else{
-                   isFavorite = false
-               }
-           }
-       }
- 
+        didSet{
+            let isValue = resultCoreDataItems.contains(where: {$0.feedUrl == self.podcast.feedUrl})
+            if isValue{
+                isFavorite = true
+            }else{
+                isFavorite = false
+            }
+        }
+    }
+    
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -63,21 +61,17 @@ class EpisodeController: UITableViewController {
     }
     
     private func fetchCoreData(){
-           let fetchRequest = PodcastCoreData.fetchRequest()
-        do {
-            let result = try context.fetch(fetchRequest)
+        let fetchRequest = PodcastCoreData.fetchRequest()
+        CoreDataController.fetchCoreData(fetchRequest: fetchRequest) { result in
             self.resultCoreDataItems = result
-        } catch {
-            print(error.localizedDescription)
         }
-           
-       }
+        
+    }
     
     private func deleteCoreData(){
-         let value = resultCoreDataItems.filter({$0.feedUrl == self.podcast.feedUrl})
-        context.delete(value.first!)
+        CoreDataController.deleteCoreData(array: resultCoreDataItems, podcast: self.podcast)
         self.isFavorite = false
-      }
+    }
     
     private func addCoreData(){
         let model = PodcastCoreData(context: context)
@@ -120,12 +114,12 @@ extension EpisodeController {
 extension EpisodeController {
     @objc func handleFavoriteButton(_ sender : UIBarButtonItem) {
         if isFavorite{
-                   deleteCoreData()
-               }else{
-                   addCoreData()
-               }
-           }
+            deleteCoreData()
+        }else{
+            addCoreData()
+        }
     }
+}
 
 
 
@@ -152,7 +146,7 @@ extension EpisodeController {
         cell.episode = self.episodeResult[indexPath.row]
         return cell
     }
-
+    
 }
 //MARK: - UITableViewDelegate
 

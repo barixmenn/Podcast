@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import Kingfisher
 class FavoriteCell: UICollectionViewCell {
      // MARK: - UI Elements
-
     private let podcastImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -30,6 +30,11 @@ class FavoriteCell: UICollectionViewCell {
         return label
     }()
     private var fullStackView: UIStackView!
+    
+    //MARK: - Properties
+    var podcastCoreData: PodcastCoreData?{
+           didSet{ configure() }
+       }
      // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,5 +70,13 @@ extension FavoriteCell{
         ])
         
     }
+    
+    private func configure(){
+           guard let podcastCoreData = self.podcastCoreData else { return }
+           let viewModel = FavoriteViewModel(podcastCoreData: podcastCoreData)
+           self.podcastImageView.kf.setImage(with: viewModel.imageUrlPodcast)
+           self.podcastNameLabel.text = viewModel.podcastNameLabel
+           self.podcastArtistNameLabel.text = viewModel.podcastArtistName
+       }
 
 }

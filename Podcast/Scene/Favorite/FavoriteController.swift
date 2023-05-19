@@ -14,7 +14,11 @@ class FavoriteController: UICollectionViewController {
     
     //MARK: - Properties
     
-    //MARK: - Life Cycle
+    private var resultCoreDataItems: [PodcastCoreData] = []{
+           didSet{ collectionView.reloadData() }
+       }
+    
+    //MARK: - Lifecycle
     init() {
         let flowLayout = UICollectionViewFlowLayout()
         super.init(collectionViewLayout: flowLayout)
@@ -24,18 +28,28 @@ class FavoriteController: UICollectionViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //MARK: - Functions
-    private func setup() {
-        style()
-        layout()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let window = UIApplication.shared.connectedScenes.first as! UIWindowScene
         let mainTabController = window.keyWindow?.rootViewController as! MainTabController
         mainTabController.viewControllers?[0].tabBarItem.badgeValue = nil
+        fetchData()
     }
+    
+    //MARK: - Functions
+    private func setup() {
+        style()
+        layout()
+    }
+    
+
+    private func fetchData(){
+           let fetchRequest = PodcastCoreData.fetchRequest()
+           CoreDataController.fetchCoreData(fetchRequest: fetchRequest) { result in
+               self.resultCoreDataItems = result
+           }
+       }
     
     //MARK: - Actions
     
@@ -54,11 +68,12 @@ extension FavoriteController {
 //MARK: - UICollectionViewDstaSource
 extension FavoriteController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return resultCoreDataItems.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FavoriteCell
+        cell.podcastCoreData = self.resultCoreDataItems[indexPath.row]
         return cell
     }
 }
