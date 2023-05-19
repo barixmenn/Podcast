@@ -30,6 +30,7 @@
 		60B522482A17E83000892803 /* PodcastSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 60B522462A17E83000892803 /* PodcastSwift.xcdatamodeld */; };
 		60B5224A2A17EE3C00892803 /* CoreData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B522492A17EE3C00892803 /* CoreData+Extensions.swift */; };
 		60B5224D2A17EF1D00892803 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B5224C2A17EF1D00892803 /* FavoriteViewModel.swift */; };
+		60B5224F2A1808DE00892803 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B5224E2A1808DE00892803 /* UserDefaults+Extensions.swift */; };
 		60E1CE672A16D947009DDB98 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E1CE662A16D947009DDB98 /* FavoriteCell.swift */; };
 		D11832254E952F4E80DB4D57 /* Pods_Podcast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33D0A823A6448E0D92A5651 /* Pods_Podcast.framework */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		60B522472A17E83000892803 /* PodcastSwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PodcastSwift.xcdatamodel; sourceTree = "<group>"; };
 		60B522492A17EE3C00892803 /* CoreData+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+Extensions.swift"; sourceTree = "<group>"; };
 		60B5224C2A17EF1D00892803 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		60B5224E2A1808DE00892803 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		60E1CE662A16D947009DDB98 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		ADCF7C7BF89FE68C2AF21887 /* Pods-Podcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Podcast.release.xcconfig"; path = "Target Support Files/Pods-Podcast/Pods-Podcast.release.xcconfig"; sourceTree = "<group>"; };
 		E33D0A823A6448E0D92A5651 /* Pods_Podcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Podcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -293,6 +295,7 @@
 			children = (
 				607F160B2A167AF200DA49A9 /* Time+Extensions.swift */,
 				60B522492A17EE3C00892803 /* CoreData+Extensions.swift */,
+				60B5224E2A1808DE00892803 /* UserDefaults+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				604B76D52A1404BB00E141CD /* SearchCell.swift in Sources */,
 				604B76CF2A13FA9600E141CD /* SearchController.swift in Sources */,
 				603384E32A154C5B00C6FB03 /* EpisodeService.swift in Sources */,
+				60B5224F2A1808DE00892803 /* UserDefaults+Extensions.swift in Sources */,
 				603384EA2A1551CC00C6FB03 /* EpisodeViewModel.swift in Sources */,
 				604B76B12A13F8EC00E141CD /* AppDelegate.swift in Sources */,
 				60B522482A17E83000892803 /* PodcastSwift.xcdatamodeld in Sources */,

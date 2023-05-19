@@ -162,4 +162,16 @@ extension EpisodeController {
         self.present(controller, animated: true)
         
     }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let downloadAction = UIContextualAction(style: .normal, title: "Download") { action, view, completion in
+            UserDefaults.downloadEpisodeWrite(episode: self.episodeResult[indexPath.row])
+            EpisodeService.downloadEpisode(episode: self.episodeResult[indexPath.row])
+            completion(true)
+
+           }
+           
+           let configuration = UISwipeActionsConfiguration(actions: [downloadAction])
+           return configuration
+       }
 }
