@@ -9,16 +9,42 @@ import Foundation
 import UIKit
 
 private let reuseIdentifier = "EpisodeCell"
+private let appDelegate = UIApplication.shared.delegate as! AppDelegate
 class EpisodeController: UITableViewController {
     //MARK: - UI Elements
     
     //MARK: - Properties
+    private let context = appDelegate.persistentContainer.viewContext
     
     private var episodeResult : [Episode] = [] {
         didSet { self.tableView.reloadData() }
     }
     
     private var podcast: Podcast
+    
+    private var isFavorite : Bool = false {
+        didSet { setupNavigationBar() }
+    }
+    
+    private var resultCoreDataItems: [PodcastCoreData] = []{
+           didSet{
+               let isValue = resultCoreDataItems.contains(where: {$0.feedUrl == self.podcast.feedUrl})
+               if isValue{
+                   isFavorite = true
+               }else{
+                   isFavorite = false
+               }
+           }
+       }
+ 
+    
+    //MARK: - Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        
+    }
+    
     init(podcast: Podcast) {
         self.podcast = podcast
         super.init(nibName: nil, bundle: nil)
@@ -28,21 +54,51 @@ class EpisodeController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-        
-    }
-    
     //MARK: - Functions
     private func setup() {
         style()
         layout()
         fetchData()
+        fetchCoreData()
     }
     
-    //MARK: - Actions
+    private func fetchCoreData(){
+           let fetchRequest = PodcastCoreData.fetchRequest()
+        do {
+            let result = try context.fetch(fetchRequest)
+            self.resultCoreDataItems = result
+        } catch {
+            print(error.localizedDescription)
+        }
+           
+       }
+    
+    private func deleteCoreData(){
+         let value = resultCoreDataItems.filter({$0.feedUrl == self.podcast.feedUrl})
+        context.delete(value.first!)
+        self.isFavorite = false
+      }
+    
+    private func addCoreData(){
+        let model = PodcastCoreData(context: context)
+        model.feedUrl = self.podcast.feedUrl
+        model.artworkUrl600 = self.podcast.artworkUrl600
+        model.artistName = self.podcast.artistName
+        model.trackName = self.podcast.trackName
+        appDelegate.saveContext()
+        isFavorite = true
+    }
+    
+    //MARK: - Function
+    private func setupNavigationBar() {
+        if isFavorite {
+            let navigationButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal), style: .done, target: self, action: #selector(handleFavoriteButton))
+            self.navigationItem.rightBarButtonItem = navigationButton
+        } else {
+            let navigationButton = UIBarButtonItem(image: UIImage(systemName: "heart")?.withTintColor(.red, renderingMode: .alwaysOriginal), style: .done, target: self, action: #selector(handleFavoriteButton))
+            self.navigationItem.rightBarButtonItem = navigationButton
+        }
+    }
     
 }
 
@@ -60,9 +116,14 @@ extension EpisodeController {
 //MARK: - Selector
 extension EpisodeController {
     @objc func handleFavoriteButton(_ sender : UIBarButtonItem) {
-        
+        if isFavorite{
+                   deleteCoreData()
+               }else{
+                   addCoreData()
+               }
+           }
     }
-}
+
 
 
 //MARK: - Helpers
@@ -70,9 +131,7 @@ extension EpisodeController {
     private func style() {
         self.navigationItem.title = podcast.trackName
         self.tableView.register(EpisodeCell.self, forCellReuseIdentifier: reuseIdentifier)
-        let navigationButton = UIBarButtonItem(title: "Favorite", style: .done, target: self, action: #selector(handleFavoriteButton))
-        self.navigationItem.rightBarButtonItem = navigationButton
-        
+        setupNavigationBar()
     }
     
     private func layout() {
